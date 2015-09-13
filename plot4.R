@@ -11,7 +11,7 @@
 ## 2) at command line, grep ^[1-2]\/2\/2007 [name of entire data file].txt > subset.txt
 ## 3) ensure file "subset.txt" is in working directory
 
-powerData <- read.table("subset.txt",header=TRUE,sep=";",dec=".",na.strings=c("?",""))
+powerData <- read.table("subset.txt",header=FALSE,sep=";",dec=".",na.strings=c("?",""))
 names(powerData) <- c("Date", "Time", "Global_active_power", "Global_reactive_power", "Voltage", "Global_intensity", "Sub_metering_1", "Sub_metering_2", "Sub_metering_3")
 powerData$Date <- as.Date(powerData$Date, "%d/%m/%Y")
 powerData$Time <- strptime(paste(powerData$Date,powerData$Time),"%Y-%m-%d%T")
@@ -35,3 +35,4 @@ plot(powerData$Time,powerData$Voltage,type="l", xlab = "datetime", ylab="Voltage
 plot(powerData$Time,powerData$Global_reactive_power,type="l", xlab = "datetime", ylab="Global Reactive Power")
 
 dev.off()
+rm(powerData)
